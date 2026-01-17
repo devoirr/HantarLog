@@ -339,7 +339,7 @@ function getStatusCounts() {
 
 // Получить название статуса
 function getStatusLabel(statusId) {
-  return statuses.find((s) => s.id === statusId)?.label || 'Не указан';
+  return statuses.find((s) => s.id === statusId)?.label || 'לא ידוע';
 }
 
 // Получить класс цвета статуса
