@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отслеживание сотрудников</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="header-left">
+          <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <h1>Отслеживание сотрудников</h1>
+        </div>
+        <button id="logoutBtn" class="btn-logout" style="display: none;">
+          <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+          </svg>
+          Выйти
+        </button>
+      </div>
+
+      <div id="errorMsg" class="message error" style="display: none;"></div>
+      <div id="successMsg" class="message success" style="display: none;"></div>
+
+      <!-- Форма для сотрудников -->
+      <div id="employeeForm" class="form-section">
+        <div class="form-group">
+          <label>Выберите ваше имя</label>
+          <select id="employeeSelect" class="input">
+            <option value="">-- Выберите --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Выберите статус</label>
+          <div class="status-grid" id="statusButtons"></div>
+        </div>
+
+        <button id="updateStatusBtn" class="btn-primary">Обновить статус</button>
+
+        <div class="admin-section">
+          <label>Админ-панель</label>
+          <div class="admin-input-group">
+            <div class="password-wrapper">
+              <svg class="icon-input" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+              <input type="password" id="adminPassword" class="input" placeholder="Пароль администратора">
+            </div>
+            <button id="adminLoginBtn" class="btn-secondary">Войти</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Админ-панель -->
+      <div id="adminPanel" class="admin-panel" style="display: none;">
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <div class="employees-section">
+          <h2>Статусы всех сотрудников</h2>
+          <div id="employeesList" class="employees-list"></div>
+        </div>
+
+        <button id="refreshBtn" class="btn-primary">
+          <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Обновить данные
+        </button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Данные синхронизируются между всеми пользователями</p>
+      <p class="footer-small">Пароль по умолчанию: admin123</p>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
