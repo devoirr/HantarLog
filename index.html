@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Отслеживание сотрудников</title>
+  <title>מצב החיילים</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
           <svg class="icon-large" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
           </svg>
-          <h1>Отслеживание сотрудников</h1>
+          <h1>מצב החיילים</h1>
         </div>
         <button id="logoutBtn" class="btn-logout" style="display: none;">
           <svg class="icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,29 +31,29 @@
       <!-- Форма для сотрудников -->
       <div id="employeeForm" class="form-section">
         <div class="form-group">
-          <label>Выберите ваше имя</label>
+          <label>בחר/י את שמך</label>
           <select id="employeeSelect" class="input">
-            <option value="">-- Выберите --</option>
+            <option value="">-- יש לבחור שם --</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Выберите статус</label>
+          <label>בחר/י את מיקומך</label>
           <div class="status-grid" id="statusButtons"></div>
         </div>
 
         <button id="updateStatusBtn" class="btn-primary">Обновить статус</button>
 
         <div class="admin-section">
-          <label>Админ-панель</label>
+          <label>בדיקת המצב</label>
           <div class="admin-input-group">
             <div class="password-wrapper">
               <svg class="icon-input" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
               </svg>
-              <input type="password" id="adminPassword" class="input" placeholder="Пароль администратора">
+              <input type="password" id="adminPassword" class="input" placeholder="סיסמת המנהל">
             </div>
-            <button id="adminLoginBtn" class="btn-secondary">Войти</button>
+            <button id="adminLoginBtn" class="btn-secondary">כניסה</button>
           </div>
         </div>
       </div>
@@ -74,11 +74,6 @@
           Обновить данные
         </button>
       </div>
-    </div>
-
-    <div class="footer">
-      <p>Данные синхронизируются между всеми пользователями</p>
-      <p class="footer-small">Пароль по умолчанию: admin123</p>
     </div>
   </div>
 </div>
