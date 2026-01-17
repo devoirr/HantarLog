@@ -29,10 +29,10 @@ try {
   firebase.initializeApp(firebaseConfig);
   database = firebase.database();
   statusesRef = database.ref('employeeStatuses');
-  console.log('Firebase подключен успешно!');
+  console.log('Firebase connected successfully!');
 } catch (error) {
-  console.error('Ошибка подключения к Firebase:', error);
-  alert('Ошибка подключения к базе данных. Проверьте конфигурацию Firebase.');
+  console.error('Error while connecting to Firebase:', error);
+  alert('Error while connection to firebase, please check the configuration.');
 }
 
 // ========================================
@@ -52,9 +52,9 @@ const employees = [
 ];
 
 const statuses = [
-  { id: 'not_departed', label: 'Ещё не выехал', color: 'not-departed' },
-  { id: 'on_road', label: 'В дороге', color: 'on-road' },
-  { id: 'arrived', label: 'Прибыл домой', color: 'arrived' },
+  { id: 'not_departed', label: 'עדיין בבסיס', color: 'not-departed' },
+  { id: 'on_road', label: 'בדרך', color: 'on-road' },
+  { id: 'arrived', label: 'הגעתי הביתה', color: 'arrived' },
 ];
 
 // Состояние приложения
@@ -108,10 +108,10 @@ function setupFirebaseListener() {
         renderAdminPanel();
       }
 
-      console.log('Данные обновлены из Firebase');
+      console.log('Data is updated from Firebase');
     },
     (error) => {
-      console.error('Ошибка чтения данных:', error);
+      console.error('Error while reading data:', error);
     },
   );
 }
@@ -125,7 +125,7 @@ async function updateStatusInFirebase(employee, status) {
     });
     return true;
   } catch (error) {
-    console.error('Ошибка сохранения в Firebase:', error);
+    console.error('Error while saving in Firebase:', error);
     throw error;
   }
 }
@@ -242,7 +242,7 @@ function setupEventListeners() {
   elements.adminLoginBtn.addEventListener('click', handleAdminLogin);
   elements.logoutBtn.addEventListener('click', handleAdminLogout);
   elements.refreshBtn.addEventListener('click', () => {
-    showSuccess('Данные обновляются автоматически!');
+    showSuccess('Data is updated automatically!');
   });
 
   elements.adminPassword.addEventListener('keypress', (e) => {
@@ -255,14 +255,14 @@ function setupEventListeners() {
 // Обновление статуса
 async function updateStatus() {
   if (!state.selectedEmployee || !state.selectedStatus) {
-    showError('Выберите имя и статус');
+    showError('בחר/י את השם שלך ואת המיקום שלך');
     return;
   }
 
   try {
     // Показываем индикатор загрузки
     elements.updateStatusBtn.disabled = true;
-    elements.updateStatusBtn.textContent = 'Обновление...';
+    elements.updateStatusBtn.textContent = 'Loading...';
 
     await updateStatusInFirebase(state.selectedEmployee, state.selectedStatus);
 
@@ -274,14 +274,14 @@ async function updateStatus() {
       btn.classList.remove('selected');
     });
 
-    showSuccess('Статус обновлён!');
+    showSuccess('תודה!');
   } catch (err) {
     showError(
-      'Ошибка при обновлении статуса. Проверьте подключение к интернету.',
+      'Error while updating status, check your internet connection',
     );
   } finally {
     elements.updateStatusBtn.disabled = false;
-    elements.updateStatusBtn.textContent = 'Обновить статус';
+    elements.updateStatusBtn.textContent = 'Update status';
   }
 }
 
@@ -294,7 +294,7 @@ function handleAdminLogin() {
     renderAdminPanel();
     hideError();
   } else {
-    showError('Неверный пароль');
+    showError('Wrong password');
   }
 }
 
