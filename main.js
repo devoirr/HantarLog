@@ -262,7 +262,7 @@ async function updateStatus() {
   try {
     // Показываем индикатор загрузки
     elements.updateStatusBtn.disabled = true;
-    elements.updateStatusBtn.textContent = 'Loading...';
+    elements.updateStatusBtn.textContent = 'שומר...';
 
     await updateStatusInFirebase(state.selectedEmployee, state.selectedStatus);
 
@@ -281,7 +281,7 @@ async function updateStatus() {
     );
   } finally {
     elements.updateStatusBtn.disabled = false;
-    elements.updateStatusBtn.textContent = 'Update status';
+    elements.updateStatusBtn.textContent = 'שמירה';
   }
 }
 
