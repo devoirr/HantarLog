@@ -21,7 +21,7 @@ const firebaseConfig = {
 };
 
 
-// Инициализация Firebase
+// Init Firebase
 let database;
 let statusesRef;
 
@@ -35,9 +35,7 @@ try {
   alert('Error while connection to firebase, please check the configuration.');
 }
 
-// ========================================
-// КОНФИГУРАЦИЯ ПРИЛОЖЕНИЯ
-// ========================================
+// Some config shit or whatever
 const ADMIN_PASSWORD = 'admin123';
 
 const employees = [
@@ -52,7 +50,7 @@ const statuses = [
   { id: 'arrived', label: 'הגעתי הביתה', color: 'arrived' },
 ];
 
-// Состояние приложения
+// Application state
 let state = {
   isAdmin: false,
   selectedEmployee: '',
@@ -60,7 +58,7 @@ let state = {
   employeeStatuses: {},
 };
 
-// Элементы DOM
+// Page elements
 const elements = {
   employeeForm: document.getElementById('employeeForm'),
   adminPanel: document.getElementById('adminPanel'),
@@ -77,9 +75,7 @@ const elements = {
   refreshBtn: document.getElementById('refreshBtn'),
 };
 
-// ========================================
-// ИНИЦИАЛИЗАЦИЯ
-// ========================================
+// Initializing
 function init() {
   renderEmployeeSelect();
   renderStatusButtons();
@@ -87,11 +83,9 @@ function init() {
   setupFirebaseListener();
 }
 
-// ========================================
-// FIREBASE ФУНКЦИИ
-// ========================================
+// * Firebase functions *
 
-// Настройка слушателя Firebase для автоматических обновлений
+// Firebase Listener
 function setupFirebaseListener() {
   statusesRef.on(
     'value',
@@ -111,7 +105,7 @@ function setupFirebaseListener() {
   );
 }
 
-// Обновление статуса в Firebase
+// Status update in firebase
 async function updateStatusInFirebase(employee, status) {
   try {
     await statusesRef.child(employee).set({
@@ -125,11 +119,9 @@ async function updateStatusInFirebase(employee, status) {
   }
 }
 
-// ========================================
-// РЕНДЕР ФУНКЦИИ
-// ========================================
+// * Rendering functions *
 
-// Рендер списка сотрудников
+// Soldier list
 function renderEmployeeSelect() {
   employees.forEach((emp) => {
     const option = document.createElement('option');
@@ -139,7 +131,7 @@ function renderEmployeeSelect() {
   });
 }
 
-// Рендер кнопок статусов
+// Status buttons
 function renderStatusButtons() {
   statuses.forEach((status) => {
     const btn = document.createElement('button');
@@ -154,13 +146,13 @@ function renderStatusButtons() {
   });
 }
 
-// Рендер панели администратора
+// Admin panel
 function renderAdminPanel() {
   renderStats();
   renderEmployeesList();
 }
 
-// Рендер статистики
+// Stats render
 function renderStats() {
   const counts = getStatusCounts();
   elements.statsGrid.innerHTML = '';
@@ -180,7 +172,7 @@ function renderStats() {
   });
 }
 
-// Рендер списка сотрудников
+// Soldiers list
 function renderEmployeesList() {
   elements.employeesList.innerHTML = '';
 
@@ -215,11 +207,9 @@ function renderEmployeesList() {
   });
 }
 
-// ========================================
-// ОБРАБОТЧИКИ СОБЫТИЙ
-// ========================================
+// * Event Listeners *
 
-// Выбор статуса
+// Status select listener
 function selectStatus(statusId) {
   state.selectedStatus = statusId;
   document.querySelectorAll('.status-btn').forEach((btn) => {
@@ -227,7 +217,7 @@ function selectStatus(statusId) {
   });
 }
 
-// Настройка обработчиков событий
+// Listeners settings
 function setupEventListeners() {
   elements.employeeSelect.addEventListener('change', (e) => {
     state.selectedEmployee = e.target.value;
@@ -247,7 +237,7 @@ function setupEventListeners() {
   });
 }
 
-// Обновление статуса
+// Status update
 async function updateStatus() {
   if (!state.selectedEmployee || !state.selectedStatus) {
     showError('בחר/י את השם שלך ואת המיקום שלך');
@@ -255,7 +245,7 @@ async function updateStatus() {
   }
 
   try {
-    // Показываем индикатор загрузки
+    // Loading indicator
     elements.updateStatusBtn.disabled = true;
     elements.updateStatusBtn.textContent = 'שומר...';
 
@@ -280,7 +270,7 @@ async function updateStatus() {
   }
 }
 
-// Вход администратора
+// Admin panel enter
 function handleAdminLogin() {
   const password = elements.adminPassword.value;
   if (password === ADMIN_PASSWORD) {
@@ -293,32 +283,29 @@ function handleAdminLogin() {
   }
 }
 
-// Выход администратора
+// Admin panel leave
 function handleAdminLogout() {
   state.isAdmin = false;
   elements.adminPassword.value = '';
   showEmployeeForm();
 }
 
-// Показать панель администратора
+// Show admin panel
 function showAdminPanel() {
   elements.employeeForm.style.display = 'none';
   elements.adminPanel.style.display = 'flex';
   elements.logoutBtn.style.display = 'flex';
 }
 
-// Показать форму сотрудника
 function showEmployeeForm() {
   elements.employeeForm.style.display = 'flex';
   elements.adminPanel.style.display = 'none';
   elements.logoutBtn.style.display = 'none';
 }
 
-// ========================================
-// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-// ========================================
+/* Helper Functions */
 
-// Получить количество по статусам
+// Get amount per status
 function getStatusCounts() {
   const counts = {};
   statuses.forEach((s) => (counts[s.id] = 0));
@@ -332,29 +319,26 @@ function getStatusCounts() {
   return counts;
 }
 
-// Получить название статуса
+// Show status label
 function getStatusLabel(statusId) {
   return statuses.find((s) => s.id === statusId)?.label || 'לא ידוע';
 }
 
-// Получить класс цвета статуса
+// Get status color
 function getStatusColor(statusId) {
   return statuses.find((s) => s.id === statusId)?.color || 'unknown';
 }
 
-// Показать ошибку
 function showError(message) {
   elements.errorMsg.textContent = message;
   elements.errorMsg.style.display = 'block';
   elements.successMsg.style.display = 'none';
 }
 
-// Скрыть ошибку
 function hideError() {
   elements.errorMsg.style.display = 'none';
 }
 
-// Показать успех
 function showSuccess(message) {
   elements.successMsg.textContent = message;
   elements.successMsg.style.display = 'block';
@@ -364,7 +348,5 @@ function showSuccess(message) {
   }, 3000);
 }
 
-// ========================================
-// ЗАПУСК ПРИЛОЖЕНИЯ
-// ========================================
+// Run app
 document.addEventListener('DOMContentLoaded', init);
